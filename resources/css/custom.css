@@ -1,0 +1,33 @@
+.nav-link {
+  color: black;
+}
+.accordion-body {
+  background: #ffffff;
+  border: 1px solid black;
+  margin: 0;
+}
+
+.accordion-button:not(.collapsed) {
+  background: #ffffff;
+}
+.accordion-header:focus {
+  z-index: 3;
+  border-color: #ff0000;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+:focused {
+  border-color: #ff0000;
+}
+input[type="file"] {
+  display: none;
+}
+.fix-input {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 1px;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-color: #0d6efd;
+  border-radius: 0.25rem;
+}
