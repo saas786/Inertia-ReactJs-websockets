@@ -32,5 +32,6 @@ Route::get("workorder/list", [
   "list",
 ])->name("list");
 Route::resource("workorder", App\Http\Controllers\WorkorderController::class);
-
+Route::resource("comments", App\Http\Controllers\CommentsController::class);
+Route::resource("images", App\Http\Controllers\ImagesController::class);
 require __DIR__ . "/auth.php";

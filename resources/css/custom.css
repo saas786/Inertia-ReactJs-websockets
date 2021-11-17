@@ -20,7 +20,6 @@
   border-color: #ff0000;
 }
 input[type="file"] {
-  display: none;
 }
 .fix-input {
   border: 1px solid #ccc;

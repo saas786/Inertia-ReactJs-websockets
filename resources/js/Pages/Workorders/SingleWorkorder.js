@@ -3,10 +3,14 @@ import Authenticated from "@/Layouts/Authenticated";
 import { Inertia } from "@inertiajs/inertia";
 import { InertiaLink, Link, useForm, usePage } from "@inertiajs/inertia-react";
 import axios from "axios";
+import CommentBox from "@/Components/CommentBox";
+import ImageBox from "@/Components/ImageBox";
 
 const SingleWorkorder = (props) => {
+  console.log("singleworkorker", props);
   const { data, setData, errors, put, processing } = useForm({
     id: props[0].id,
+    workorder_id: props[0].id,
   });
   const handleDelete = () => {
     if (confirm("do you really want to delete this workorder?")) {
@@ -44,11 +48,35 @@ const SingleWorkorder = (props) => {
               Delete
             </button>
           </div>
-          <img
-            className="img-fluid"
-            alt={`work order ${props[0].id}`}
-            src={`/storage/cover_images/${props[0].image}`}
-          />
+          <CommentBox props={data} />
+          <ImageBox props={data} />
+          <h3>Comments:</h3>
+          <ul className="list-group list-group flush">
+            {props[1].map((c, i) => {
+              return (
+                <li key={i} className="list-group-item">
+                  {c.text}
+                </li>
+              );
+            })}
+          </ul>
+          <div className="card-group">
+            {props[2].map((i) => {
+              return (
+                <div key={i} className="card">
+                  <img
+                    className="card-img-top img-fluid"
+                    src={`/storage/workorder_images/${i.workorder_image}`}
+                  />
+                  <div className="card-footer">
+                    <small className="text-muted">
+                      Created on: {i.created_at}
+                    </small>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </Authenticated>

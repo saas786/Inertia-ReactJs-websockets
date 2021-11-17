@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comments extends Model
+class Images extends Model
 {
   use HasFactory;
-  protected $fillable = ["workorder_id", "user_id", "text"];
+  protected $fillable = ["workorder_id", "user_id", "workorder_image"];
   public function workorder()
   {
     return $this->belongsTo(Workorder::class);

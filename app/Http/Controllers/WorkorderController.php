@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Comments;
+use App\Models\Images;
 use App\Models\Workorder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -64,7 +65,7 @@ class WorkorderController extends Controller
     $wo->user_id = $request["user_id"];
     $wo->image = $fileNameToStore;
     $wo->save();
-    return Inertia::render("Dashboard");
+    return Inertia::render("Workorders/Workorders", Workorder::paginate(10));
   }
 
   /**
@@ -75,8 +76,13 @@ class WorkorderController extends Controller
    */
   public function show($id)
   {
+    $wo = Workorder::findOrFail($id);
+    $images = Images::where("workorder_id", $id)->get();
+    $comments = Comments::where("workorder_id", $id)->get();
     return Inertia::render("Workorders/SingleWorkorder", [
-      Workorder::findOrFail($id),
+      $wo,
+      $comments,
+      $images,
     ]);
   }
 
@@ -139,6 +145,21 @@ class WorkorderController extends Controller
    */
   public function destroy($id)
   {
+    $wo = Workorder::find($id);
+    //Check if post exists before deleting
+    if (!isset($wo)) {
+      return redirect("/workorder")->with("error", "No Post Found");
+    }
+
+    // Check for correct user
+    if (auth()->user()->id !== $wo->user_id) {
+      return redirect("/workorder")->with("error", "Unauthorized Page");
+    }
+
+    if ($wo->cover_image != "noimage.jpg") {
+      // Delete Image
+      Storage::delete("public/cover_images/" . $wo->cover_image);
+    }
     Workorder::destroy($id);
     return Inertia::render("Workorders/Workorders", [
       Workorder::orderBy("task", "desc")->paginate(10),
