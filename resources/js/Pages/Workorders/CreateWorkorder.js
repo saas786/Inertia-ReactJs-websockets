@@ -44,7 +44,14 @@ const CreateWorkorder = (props) => {
     <Authenticated
       auth={props.auth}
       errors={props.errors}
-      header={<h2>Create New Work Order</h2>}
+      header={
+        <div>
+          <h2>Create New Work Order</h2>
+          <strong className="text-danger">
+            Do not use Names of Residents in Work Orders
+          </strong>
+        </div>
+      }
     >
       <div className="card p-3">
         <form onSubmit={handleSubmit}>
@@ -62,7 +69,7 @@ const CreateWorkorder = (props) => {
           </div>
           <div className="mb-3">
             <label htmlFor="desc" className="l">
-              <span className="fs-2">Task Description</span>
+              <span className="fs-2">Description</span>
             </label>
             <textarea
               name="desc"
@@ -82,7 +89,7 @@ const CreateWorkorder = (props) => {
                   e.preventDefault();
                   setData("priority", "none");
                 }}
-                className="btn form-control  btn-outline-primary"
+                className="btn btn-sm form-control  btn-outline-primary"
               >
                 NONE
               </button>
@@ -91,7 +98,7 @@ const CreateWorkorder = (props) => {
                   e.preventDefault();
                   setData("priority", "low");
                 }}
-                className="btn mx-1  form-control btn-outline-success"
+                className="btn mx-1 btn-sm  form-control btn-outline-success"
               >
                 LOW
               </button>
@@ -109,7 +116,7 @@ const CreateWorkorder = (props) => {
                   e.preventDefault();
                   setData("priority", "high");
                 }}
-                className="btn mx-1  form-control btn-outline-danger"
+                className="btn mx-1 btn-sm  form-control btn-outline-danger"
               >
                 HIGH
               </button>
@@ -119,7 +126,7 @@ const CreateWorkorder = (props) => {
                 <h3>Status </h3>
               </span>
               <button
-                className="btn  form-control btn-outline-primary"
+                className="btn btn-sm form-control btn-outline-primary"
                 onClick={(e) => {
                   e.preventDefault();
                   setData("status", "open");

@@ -3,12 +3,14 @@ import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import { Link } from "@inertiajs/inertia-react";
+import { InertiaLink, Link } from "@inertiajs/inertia-react";
 import WorkorderList from "@/Components/WorkorderList";
+import UserWorkorders from "@/Pages/Workorders/UserWorkorders";
 export default function Authenticated({ auth, header, children }) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
     useState(false);
-
+  const [currentUser, setCurrentUser] = useState(auth.user.id);
+  console.log("authentectate", auth);
   return (
     <div className="container">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -47,6 +49,16 @@ export default function Authenticated({ auth, header, children }) {
                   Create New Workorder
                 </Link>
               </li>
+              <li>
+                <Link
+                  className="dropdown-item"
+                  href={route("users", auth.user.id)}
+                  as="button"
+                  method="post"
+                >
+                  My Workorders
+                </Link>
+              </li>
               <li className="nav-item dropdown">
                 <Link
                   className="nav-link dropdown-toggle"
@@ -60,7 +72,12 @@ export default function Authenticated({ auth, header, children }) {
                 </Link>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
-                    <Link className="dropdown-item" href={route("logout")}>
+                    <Link
+                      className="dropdown-item"
+                      href={route("logout")}
+                      as="button"
+                      method="post"
+                    >
                       Logout
                     </Link>
                   </li>
@@ -82,8 +99,9 @@ export default function Authenticated({ auth, header, children }) {
         </div>
       </nav>
       <div className="row mt-5">
-        <div className="col-sm-3 card">
+        <div className="col-sm-4 card">
           <WorkorderList />
+          <UserWorkorders props={auth.user} />
         </div>
         <div className="col">
           {header && (

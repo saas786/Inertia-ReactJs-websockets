@@ -44,9 +44,16 @@ const SingleWorkorder = (props) => {
             >
               Edit
             </Link>
-            <button className="btn btn-outline-warning" onClick={handleDelete}>
-              Delete
-            </button>
+            {props.auth.user.id === props[0].user_id ? (
+              <button
+                className="btn btn-outline-warning"
+                onClick={handleDelete}
+              >
+                Delete
+              </button>
+            ) : (
+              <div></div>
+            )}
           </div>
           <CommentBox props={data} />
           <ImageBox props={data} />
@@ -54,24 +61,26 @@ const SingleWorkorder = (props) => {
           <ul className="list-group list-group flush">
             {props[1].map((c, i) => {
               return (
-                <li key={i} className="list-group-item">
+                <li key={c.id} className="list-group-item">
                   {c.text}
                 </li>
               );
             })}
           </ul>
-          <div className="card-group">
+          <div className="row row-cols-1 row-cols-md-2 g-4">
             {props[2].map((i) => {
               return (
-                <div key={i} className="card">
-                  <img
-                    className="card-img-top img-fluid"
-                    src={`/storage/workorder_images/${i.workorder_image}`}
-                  />
-                  <div className="card-footer">
-                    <small className="text-muted">
-                      Created on: {i.created_at}
-                    </small>
+                <div key={i.id} className="col">
+                  <div className="card">
+                    <img
+                      className="card-img-top img-fluid"
+                      src={`/storage/workorder_images/${i.workorder_image}`}
+                    />
+                    <div className="card-footer">
+                      <small className="text-muted">
+                        Created on: {i.created_at}
+                      </small>
+                    </div>
                   </div>
                 </div>
               );

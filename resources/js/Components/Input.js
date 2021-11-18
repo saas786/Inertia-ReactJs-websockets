@@ -23,7 +23,7 @@ export default function Input({
       <input
         type={type}
         name={name}
-        className={`form-control` + className}
+        className={className}
         ref={input}
         autoComplete={autoComplete}
         required={required}

@@ -36,81 +36,103 @@ export default function Register() {
   };
 
   return (
-    <Guest>
-      <Head title="Register" />
-
-      <ValidationErrors errors={errors} />
-
-      <form onSubmit={submit}>
+    <Guest
+      header={
         <div>
-          <Label forInput="name" value="Name" />
-
-          <Input
-            type="text"
-            name="name"
-            value={data.name}
-            className="mt-1 block w-full"
-            autoComplete="name"
-            isFocused={true}
-            handleChange={onHandleChange}
-            required
-          />
+          <div className="d-flex justify-content-center">
+            <img
+              src="/storage/images/Legendary_Logo.png"
+              alt="legendary logo"
+              height="165"
+            />
+          </div>
+          <h2>Registration</h2>
+          <strong className="text-danger">
+            The email and passwords are only used for registration and login
+            purposes only.
+          </strong>
+          <p>
+            You may use any email address you wish as long as it's valid email
+            format (eg. something@something.something){" "}
+          </p>
+          <p>
+            Just make sure you <strong>remember</strong> what you use for an
+            email address and password to login with
+          </p>
         </div>
+      }
+    >
+      <Head title="Register" />
+      <ValidationErrors errors={errors} />
+      <div className="p-3">
+        <form onSubmit={submit}>
+          <div>
+            <Label forInput="name" value="Name" />
 
-        <div className="mt-4">
-          <Label forInput="email" value="Email" />
+            <Input
+              type="text"
+              name="name"
+              value={data.name}
+              className="form-control mb-3"
+              autoComplete="name"
+              isFocused={true}
+              handleChange={onHandleChange}
+              required
+            />
+          </div>
 
-          <Input
-            type="email"
-            name="email"
-            value={data.email}
-            className="mt-1 block w-full"
-            autoComplete="username"
-            handleChange={onHandleChange}
-            required
-          />
-        </div>
+          <div className="">
+            <Label forInput="email" value="Email" />
 
-        <div className="mt-4">
-          <Label forInput="password" value="Password" />
+            <Input
+              type="email"
+              name="email"
+              value={data.email}
+              className="form-control mb-3"
+              autoComplete="username"
+              handleChange={onHandleChange}
+              required
+            />
+          </div>
 
-          <Input
-            type="password"
-            name="password"
-            value={data.password}
-            className="mt-1 block w-full"
-            autoComplete="new-password"
-            handleChange={onHandleChange}
-            required
-          />
-        </div>
+          <div className="mt-4">
+            <Label forInput="password" value="Password (min-8 chars.)" />
 
-        <div className="mt-4">
-          <Label forInput="password_confirmation" value="Confirm Password" />
+            <Input
+              type="password"
+              name="password"
+              value={data.password}
+              className="form-control mb-3"
+              autoComplete="new-password"
+              handleChange={onHandleChange}
+              required
+            />
+          </div>
 
-          <Input
-            type="password"
-            name="password_confirmation"
-            value={data.password_confirmation}
-            className="mt-1 block w-full"
-            handleChange={onHandleChange}
-            required
-          />
-        </div>
+          <div className="mt-4">
+            <Label forInput="password_confirmation" value="Confirm Password" />
 
-        <div className="flex items-center justify-end mt-4">
-          <Link
-            href={route("login")}
-            className="underline text-sm text-gray-600 hover:text-gray-900"
-          >
-            Already registered?
-          </Link>
+            <Input
+              type="password"
+              name="password_confirmation"
+              value={data.password_confirmation}
+              className="form-control mb-3"
+              handleChange={onHandleChange}
+              required
+            />
+          </div>
 
-          <Button className="ml-4" processing={processing}>
-            Register
-          </Button>
-        </div>
-      </form>
+          <div className="d-flex justify-content-around mb-3">
+            <Link href={route("login")} className="btn btn-outline-primary">
+              Already registered?
+            </Link>
+
+            <Button className="btn btn-outline-success" processing={processing}>
+              Register
+            </Button>
+          </div>
+        </form>
+      </div>
     </Guest>
   );
 }

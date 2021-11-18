@@ -4,6 +4,7 @@ import { Head, Link } from "@inertiajs/inertia-react";
 import Pagination from "@/Components/Pagination";
 
 const Workorders = (props) => {
+  console.log("workorders props", props);
   return (
     <Authenticated
       auth={props.auth}
@@ -60,7 +61,13 @@ const Workorders = (props) => {
         ) : (
           <h2>No Work Orders !!</h2>
         )}
-        <Pagination links={props[0].links} />
+        {props[0].links ? (
+          <nav className="paginagion">
+            <Pagination links={props[0].links} />{" "}
+          </nav>
+        ) : (
+          <div></div>
+        )}
       </div>
     </Authenticated>
   );

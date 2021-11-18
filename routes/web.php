@@ -3,7 +3,6 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +30,10 @@ Route::get("workorder/list", [
   App\Http\Controllers\WorkorderListController::class,
   "list",
 ])->name("list");
+Route::get("workorder/users", [
+  App\Http\Controllers\WorkorderListController::class,
+  "users",
+])->name("users");
 Route::resource("workorder", App\Http\Controllers\WorkorderController::class);
 Route::resource("comments", App\Http\Controllers\CommentsController::class);
 Route::resource("images", App\Http\Controllers\ImagesController::class);

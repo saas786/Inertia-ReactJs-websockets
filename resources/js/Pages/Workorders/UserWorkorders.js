@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from "react";
 import Authenticated from "@/Layouts/Authenticated";
-import { Head } from "@inertiajs/inertia-react";
-import { Link } from "@inertiajs/inertia-react";
+import { Inertia } from "@inertiajs/inertia";
+import {
+  Head,
+  Link,
+  InertiaLink,
+  usePage,
+  useForm,
+} from "@inertiajs/inertia-react";
 import axios from "axios";
 
-const WorkorderList = (props) => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    axios(route("list")).then((res) => setData(res.data));
-  }, []);
+const UserWorkorders = (props) => {
+  console.log("userworkorders", props);
+  const [users, setUsers] = useState([]);
+  const [user_id, setUser_id] = useState(props);
+
   return (
     <div className="">
       <ul className="p-0  list-group-flush">
-        {data ? (
-          data.map((w, i) => {
+        {users ? (
+          users.map((w, i) => {
             return (
               <li key={i} className="list-group-item nav-item">
                 <Link
@@ -34,4 +40,4 @@ const WorkorderList = (props) => {
   );
 };
 
-export default WorkorderList;
+export default UserWorkorders;

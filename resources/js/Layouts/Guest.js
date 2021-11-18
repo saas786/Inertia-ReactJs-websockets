@@ -2,11 +2,16 @@ import React from "react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import { Link } from "@inertiajs/inertia-react";
 
-export default function Guest({ children }) {
+export default function Guest({ header, children }) {
   return (
     <div className="container">
-      <div className="d-flex justify-content-center mt-5 ">
-        <div className="card p-2 w-50  ">{children}</div>
+      {header && (
+        <header className="">
+          <div className="">{header}</div>
+        </header>
+      )}
+      <div className="m-5">
+        <div className="  ">{children}</div>
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ class WorkorderController extends Controller
   public function index()
   {
     return Inertia::render("Workorders/Workorders", [
-      Workorder::orderBy("task", "desc")->paginate(10),
+      Workorder::orderBy("task", "desc")->paginate(5),
     ]);
   }
   /**
@@ -65,7 +65,9 @@ class WorkorderController extends Controller
     $wo->user_id = $request["user_id"];
     $wo->image = $fileNameToStore;
     $wo->save();
-    return Inertia::render("Workorders/Workorders", Workorder::paginate(10));
+    return Inertia::render("Workorders/Workorders", [
+      Workorder::orderBy("task", "desc")->paginate(10),
+    ]);
   }
 
   /**
@@ -162,7 +164,7 @@ class WorkorderController extends Controller
     }
     Workorder::destroy($id);
     return Inertia::render("Workorders/Workorders", [
-      Workorder::orderBy("task", "desc")->paginate(10),
+      Workorder::orderBy("task", "desc")->paginate(5),
     ]);
   }
 }

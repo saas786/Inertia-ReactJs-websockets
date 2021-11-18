@@ -36,70 +36,94 @@ export default function Login({ status, canResetPassword }) {
   };
 
   return (
-    <Guest>
+    <Guest
+      className="container"
+      header={
+        <div>
+          <div className="d-flex justify-content-center">
+            <img
+              src="/storage/images/Legendary_Logo.png"
+              alt="legendary logo"
+              height="165"
+            />
+          </div>
+          <div className="d-flex justify-content-center">
+            <h2>Login</h2>
+          </div>
+        </div>
+      }
+    >
       <Head title="Log in" />
 
       {status && <div className="">{status}</div>}
 
       <ValidationErrors errors={errors} />
+      <div className="card p-3">
+        <form onSubmit={submit}>
+          <div>
+            <Label forInput="email" value="Email" className="form-label" />
 
-      <form onSubmit={submit}>
-        <div>
-          <Label forInput="email" value="Email" className="" />
-
-          <Input
-            type="text"
-            name="email"
-            value={data.email}
-            className=""
-            autoComplete="username"
-            isFocused={true}
-            handleChange={onHandleChange}
-          />
-        </div>
-
-        <div className="my-3">
-          <Label forInput="password" value="Password" />
-
-          <Input
-            type="password"
-            name="password"
-            value={data.password}
-            className=""
-            autoComplete="current-password"
-            handleChange={onHandleChange}
-          />
-        </div>
-
-        <div className="form-check my-3">
-          <label className="form-check-label mb-3">
-            <Checkbox
-              name="remember"
-              value={data.remember}
+            <Input
+              type="text"
+              name="email"
+              value={data.email}
+              className="form-control"
+              autoComplete="username"
+              isFocused={true}
               handleChange={onHandleChange}
             />
+          </div>
 
-            <span className="">Remember me</span>
-          </label>
-        </div>
+          <div className="my-3">
+            <Label
+              forInput="password"
+              value="Password"
+              className="form-label"
+            />
 
-        <div className="d-flex justify-content-around">
-          <Link className="btn btn-outline-success" href={route("register")}>
-            Register Here
-          </Link>
-          {canResetPassword && (
+            <Input
+              type="password"
+              name="password"
+              value={data.password}
+              className="form-control"
+              autoComplete="current-password"
+              handleChange={onHandleChange}
+            />
+          </div>
+
+          <div className="form-check my-3">
+            <label className="form-check-label mb-3">
+              <Checkbox
+                name="remember"
+                value={data.remember}
+                handleChange={onHandleChange}
+              />
+
+              <span className="">Remember me</span>
+            </label>
+          </div>
+
+          <div className="d-flex  justify-content-evenly">
             <Link
-              href={route("password.request")}
-              className="btn btn-outline-warning"
+              className="btn  btn-outline-success "
+              href={route("register")}
             >
-              Forgot your password?
+              Register Here
             </Link>
-          )}
-          <Button className="btn btn-outline-primary" processing={processing}>
-            Log in
-          </Button>
-        </div>
-      </form>
+            {canResetPassword && (
+              <Link
+                href={route("password.request")}
+                className="btn btn-outline-warning"
+              >
+                Forgot your password?
+              </Link>
+            )}
+            <Button className="btn btn-outline-primary" processing={processing}>
+              Log in
+            </Button>
+          </div>
+        </form>
+      </div>
     </Guest>
   );
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comments;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class CommentsController extends Controller
@@ -40,7 +41,7 @@ class CommentsController extends Controller
     $comment->workorder_id = $request["workorder_id"];
     $comment->user_id = auth()->user()->id;
     $comment->save();
-    return $comment;
+    return Redirect::route("workorder.show", $request["workorder_id"]);
   }
 
   /**
